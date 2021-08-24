@@ -10,4 +10,9 @@ class HomeController extends Controller
         
         return view('welcome');
     }
+
+    public function create(){
+        echo __METHOD__;
+        die();
+    }
 }
