@@ -17,7 +17,7 @@ use App\Http\Controllers\ProductsController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/hello', function () {
     return view('hello');
@@ -101,6 +101,13 @@ Route::prefix('san-pham')->group( function(){
 });
 
 Route::resource('products',ProductsController::class);
+
+//Route::get( 'admin/dashboard',\App\Http\Controllers\Admin\ProductsController::class )->middleware('CheckAge');
+
+Route::get( 'admin/dashboard',\App\Http\Controllers\Admin\ProductsController::class );
+
+Route::resource('photos',ProductsController::class);
+
 
 
 

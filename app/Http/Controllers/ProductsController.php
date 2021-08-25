@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+
+use App\Models\User;
 
 class ProductsController extends Controller
 {
@@ -11,6 +14,11 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct( $user User ){
+
+    }
+
     public function index()
     {
         dd(__METHOD__);
@@ -24,7 +32,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        dd(__METHOD__);
+        return view('products.create');
     }
 
     /**
@@ -36,6 +44,7 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //post tu trang tao moi
+        dd(__METHOD__);
     }
 
     /**
@@ -47,6 +56,7 @@ class ProductsController extends Controller
     public function show($id)
     {
         dd(__METHOD__.' '.$id);
+
     }
 
     /**
@@ -58,6 +68,12 @@ class ProductsController extends Controller
     public function edit($id)
     {
         //trang sua
+        //dd(__METHOD__.' '.$id);
+
+        $params = [
+            'id' => $id
+        ];
+        return view('products.edit',$params);
     }
 
     /**
@@ -70,6 +86,8 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         //xu ly post tu trang sua
+
+        dd( $request->user_name );
     }
 
     /**
