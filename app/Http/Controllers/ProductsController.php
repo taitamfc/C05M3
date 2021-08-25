@@ -15,7 +15,7 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct( $user User ){
+    public function __construct( ){
 
     }
 

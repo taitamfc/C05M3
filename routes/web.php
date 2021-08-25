@@ -36,9 +36,9 @@ Route::get('/giao-vien/{teacher_id}/{course_id}/{subject_id?}',function( $teache
     dd($teacher_id .' - '. $course_id.' - '. $subject_id);
 });
 
-Route::post('dang-nhap-123',function(){
-    dd('Dang Nhap');
-})->name('login');
+// Route::post('dang-nhap-123',function(){
+//     dd('Dang Nhap');
+// })->name('login');
 
 /*
     Dat nam cho router, goi o view bang ham
@@ -104,11 +104,21 @@ Route::resource('products',ProductsController::class);
 
 //Route::get( 'admin/dashboard',\App\Http\Controllers\Admin\ProductsController::class )->middleware('CheckAge');
 
-Route::get( 'admin/dashboard',\App\Http\Controllers\Admin\ProductsController::class );
+// Route::get( 'admin/dashboard',\App\Http\Controllers\Admin\ProductsController::class );
 
 Route::resource('photos',ProductsController::class);
 
 
 
 
+// Route::prefix('admin')->group( function(){
+//     Route::get('/dashboard',[ProductsController::class,'index']);
+// })->middleware('auth');
+
+Route::get('/dang-nhap',[ProductsController::class,'create'])->name('login');
+
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
+{
+    Route::get('/dashboard',[ProductsController::class,'index']);
+});
 
