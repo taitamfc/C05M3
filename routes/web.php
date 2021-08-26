@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductsController;
-
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,110 +14,9 @@ use App\Http\Controllers\ProductsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
-Route::get('/hello', function () {
-    return view('hello');
-});
-
-//
-Route::delete('/delete/123',function(){
-    dd(123);
-});
-
-Route::get('/delete/123',function(){
-    dd(123);
-});
-
-Route::get('/giao-vien/{teacher_id}/{course_id}/{subject_id?}',function( $teacher_id,$course_id, $subject_id = 0 ){
-    dd($teacher_id .' - '. $course_id.' - '. $subject_id);
-});
-
-// Route::post('dang-nhap-123',function(){
-//     dd('Dang Nhap');
-// })->name('login');
-
-/*
-    Dat nam cho router, goi o view bang ham
-    route('login')
-*/ 
-
-/*
-Chi dinh routing lam viec voi controller
-*/
-Route::get('/create',[App\Http\Controllers\HomeController::class,'create']);
-
-/*
-    Quan ly san pham
-    Quan ly don hang
-*/
-
-Route::get('don-hang/index',function(){
-    return 'Danh sach don hang';
-});
-
-Route::get('don-hang/show/{id}',function($id){
-    return 'Xem chi tiet don hang';
-});
-
-
-Route::get('don-hang/create',function(){
-    return 'Them moi don hang';
-});
-Route::post('don-hang/store',function(){
-    return 'Luu moi don hang';
-});
-
-Route::get('don-hang/edit/{id}',function($id){
-    return 'Sua don hang';
-});
-Route::put('don-hang/update/{id}',function($id){
-    return 'Cap nhat don hang';
-});
-
-Route::delete('don-hang/delete/{id}',function($id){
-    return 'Xoa don hang';
-});
-
-Route::prefix('don-hang')->group( function(){
-    Route::get('/index',function(){
-        return 'Danh sach don hang';
-    });
-
-    Route::get('/create',function(){
-        return 'Them moi don hang';
-    });
-});
-
-Route::prefix('san-pham')->group( function(){
-    Route::get('/index',function(){
-        return 'Danh sach don hang';
-    });
-    
-    Route::get('/create',[HomeController::class,'create']);
-});
-
-Route::resource('products',ProductsController::class);
-
-//Route::get( 'admin/dashboard',\App\Http\Controllers\Admin\ProductsController::class )->middleware('CheckAge');
-
-// Route::get( 'admin/dashboard',\App\Http\Controllers\Admin\ProductsController::class );
-
-Route::resource('photos',ProductsController::class);
-
-
-
-
-// Route::prefix('admin')->group( function(){
-//     Route::get('/dashboard',[ProductsController::class,'index']);
-// })->middleware('auth');
-
-Route::get('/dang-nhap',[ProductsController::class,'create'])->name('login');
-
-Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function()
+/* Admin */
+Route::group(['prefix' => 'admin'], function()
 {
-    Route::get('/dashboard',[ProductsController::class,'index']);
+    Route::get('/dashboard',DashboardController::class)->name('dashboard');
+    Route::resource('products',ProductsController::class);
 });
-
