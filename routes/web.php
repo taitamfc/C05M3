@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\CategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,4 +20,6 @@ Route::group(['prefix' => 'admin'], function()
 {
     Route::get('/dashboard',DashboardController::class)->name('dashboard');
     Route::resource('products',ProductsController::class);
+    
+    Route::resource('categories',CategoriesController::class);
 });

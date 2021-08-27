@@ -1,8 +1,7 @@
 @extends('layouts.admin')
 
-@section('title') 
-Tổng quan 
-@endsection
+@section('title','Tổng quan') 
+
 
 @section('content')
 <!-- Small boxes (Stat box) -->
