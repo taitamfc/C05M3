@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Tag;
 
-use App\Repositories\Eloquents\ProductRepository;
+//use App\Repositories\Eloquents\ProductRepository;
+use App\Repositories\Eloquents\ItemRepository;
 
 class ProductsController extends Controller
 {
     protected $productRepository;
 
-    public function __construct(ProductRepository $productRepository)
+    public function __construct(ItemRepository $productRepository)
     {
         $this->productRepository = $productRepository;
     }
