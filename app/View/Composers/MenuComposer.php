@@ -25,7 +25,14 @@ class MenuComposer{
                 'title' => 'Quản lý danh mục',
                 'link' => '#',
                 'icon' => 'fa fa-pie-chart',
-                'name'  => 'products.index',
+                'name'  => 'categories.index',
+            ],
+            [
+                'id' => 4,
+                'title' => 'Quản lý thẻ',
+                'link' => '#',
+                'icon' => 'fa fa-pie-chart',
+                'name'  => 'tags.index',
             ]
         ];
 

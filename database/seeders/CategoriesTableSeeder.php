@@ -17,13 +17,14 @@ class CategoriesTableSeeder extends Seeder
     {
         for ($i=0; $i < 10; $i++) { 
             DB::table('categories')->insert([
-                'name'          => Str::random(10),
-                'description'   => Str::random(10),
-                'image'         => Str::random(10),
+                'name'          => 'Category '.rand(1, 10),
+                'description'   => 'Description '.rand(1, 10),
+                'image'         => '',
                 'status'        => 1,
                 'created_at'    => date('Y-m-d H:i:s'),
                 'updated_at'    => date('Y-m-d H:i:s'),
             ]);
         }
     }
+
 }

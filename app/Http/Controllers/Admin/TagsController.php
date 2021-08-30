@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Category;
-
-class CategoriesController extends Controller
+class TagsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,16 +14,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        // Get all records
-        $items = Category::all();
-
-        $item = Category::find(1); //has many tên mối quan hệ products
-        dd($item->products);
-
-        $params = [
-            'items' => $items
-        ];
-        return view('admin.categories.index',$params);
+        //
     }
 
     /**
@@ -68,13 +57,7 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        $item = Category::find($id);
-        // dd($item->toArray());   
-
-        $params = [
-            'item' => $item
-        ];
-        return view('admin.categories.edit',$params);
+        //
     }
 
     /**
@@ -86,23 +69,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //lấy giá trị đầu vào
-        //dd( $request->all() );
-
-        //validate    
-
-
-        //lưu dữ liệu
-        $item = Category::find($id);
-        $item->name         = $request->name;
-        $item->description  = $request->description;
-        $item->save();
-
-        //thông báo
-
-        //chuyển hướng
-        return redirect()->route('categories.index');
-        //return redirect()->route('categories.edit',$id);
+        //
     }
 
     /**

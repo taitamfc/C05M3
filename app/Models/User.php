@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\Phone;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -41,4 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /* đặt tên cho kết nối */
+    public function phone(){
+        //tên class => 
+        //return $this->hasOne(Phone::class, 'foreign_key', 'local_key');
+        return $this->hasOne( Phone::class,'id','phone_id');
+    }
 }

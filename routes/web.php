@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\TagsController;
+use App\Http\Controllers\Admin\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +22,7 @@ Route::group(['prefix' => 'admin'], function()
 {
     Route::get('/dashboard',DashboardController::class)->name('dashboard');
     Route::resource('products',ProductsController::class);
-    
     Route::resource('categories',CategoriesController::class);
+    Route::resource('tags',TagsController::class);
+    Route::resource('users',UsersController::class);
 });

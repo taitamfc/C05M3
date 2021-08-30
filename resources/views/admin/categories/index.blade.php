@@ -15,7 +15,6 @@ Quản lý danh mục sản phẩm
                   <tr>
                      <th style="width: 10px">#</th>
                      <th>Tên</th>
-                     <th>Trạng Thái</th>
                      <th>Ngày Tạo</th>
                      <th>Hành Động</th>
                   </tr>
@@ -23,7 +22,6 @@ Quản lý danh mục sản phẩm
                   <tr>
                      <td>{{ $item->id }}</td>
                      <td>{{ $item->name }}</td>
-                     <td>{{ $item->status }}</td>
                      <td>{{ $item->created_at }}</td>
                      <td>
                         <a href="{{ route('categories.edit',$item->id) }}" class="badge bg-light-blue">Sửa</a>
