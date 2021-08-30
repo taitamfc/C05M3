@@ -10,13 +10,15 @@ use App\Models\Category;
 use App\Models\Tag;
 
 //use App\Repositories\Eloquents\ProductRepository;
-use App\Repositories\Eloquents\ItemRepository;
+//use App\Repositories\Eloquents\ItemRepository;
+
+use App\Repositories\Contracts\ProductRepositoryInterface;
 
 class ProductsController extends Controller
 {
     protected $productRepository;
 
-    public function __construct(ItemRepository $productRepository)
+    public function __construct(ProductRepositoryInterface $productRepository)
     {
         $this->productRepository = $productRepository;
     }

@@ -2,14 +2,14 @@
 // app/Repositories/Eloquents/ProductRepository.php
 
 namespace App\Repositories\Eloquents;
-
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Models\Product;
 
 /*
 ProductRepository sẽ đảm nhận vai trò chính tương tác với Model,
 */
 
-class ProductRepository
+class ProductRepository implements ProductRepositoryInterface
 {
     public function all()
     {

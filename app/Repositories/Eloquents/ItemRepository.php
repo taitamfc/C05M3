@@ -2,14 +2,14 @@
 // app/Repositories/Eloquents/ItemRepository.php
 
 namespace App\Repositories\Eloquents;
-
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Models\Item;
 
 /*
 ItemRepository sẽ đảm nhận vai trò chính tương tác với Model,
 */
 
-class ItemRepository
+class ItemRepository implements ProductRepositoryInterface
 {
     public function all()
     {
