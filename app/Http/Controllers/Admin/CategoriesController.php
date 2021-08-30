@@ -6,9 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Category;
+use App\Models\Product;
 
 class CategoriesController extends Controller
 {
+    protected $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,10 +25,7 @@ class CategoriesController extends Controller
     {
         // Get all records
         $items = Category::all();
-
-        $item = Category::find(1); //has many tên mối quan hệ products
-        dd($item->products);
-
+        
         $params = [
             'items' => $items
         ];
@@ -57,7 +61,14 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Category::find(1); //has many tên mối quan hệ products
+        //$products = Product::where('category_id',$id)->get();
+        $products = $this->productRepository->findByCategory($id);
+        $params = [
+            'item'      => $item,
+            'products'  => $products
+        ];
+        return view('admin.categories.index',$params);
     }
 
     /**

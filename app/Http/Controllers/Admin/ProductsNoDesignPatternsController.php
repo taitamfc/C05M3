@@ -5,21 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Tag;
 
-use App\Repositories\Eloquents\ProductRepository;
-
 class ProductsController extends Controller
 {
-    protected $productRepository;
-
-    public function __construct(ProductRepository $productRepository)
-    {
-        $this->productRepository = $productRepository;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +18,12 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $items = $this->productRepository->all();
+        $items = Product::all();
+
+        foreach( $items as $item ){
+            $item->formated_tags = implode(',',$item->tags->pluck('name')->toArray() );
+        }
+
         $params = [
             'items' => $items
         ];
@@ -43,12 +39,16 @@ class ProductsController extends Controller
     {
         $categories = Category::all();
         $tags       = Tag::all();
+
+
         $categories = $categories->pluck('name','id')->toArray();
         $tags       = $tags->pluck('name','id')->toArray();
+
         $params = [
             'categories'    => $categories,
             'tags'          => $tags
         ];
+
         return view('admin.products.create',$params);
     }
 
@@ -60,7 +60,17 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->productRepository->store($request);
+        
+        $product = new Product();
+        $product->name = $request->name;
+        $product->image = '';
+        $product->status = 1;
+        //$product->description = $request->description;
+        $product->category_id = $request->category_id;
+        $product->save();
+
+        $product->tags()->attach( $request->tags );
+
         return redirect()->route('products.index');
     }
 
@@ -72,11 +82,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $item = $this->productRepository->find($id);
-        $params = [
-            'item'              => $item
-        ];
-        return view('admin.products.show',$params);
+        //
     }
 
     /**
@@ -89,7 +95,8 @@ class ProductsController extends Controller
     {
         $categories = Category::all();
         $tags       = Tag::all();
-        $item = $this->productRepository->find($id);
+        $item       = Product::find($id);
+
 
         $categories = $categories->pluck('name','id')->toArray();
         $tags       = $tags->pluck('name','id')->toArray();
@@ -113,7 +120,34 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->productRepository->update($request,$id);
+       
+        $product = Product::find($id);
+
+        $product->name = $request->name;
+        $product->image = '';
+        $product->status = 1;
+        $product->category_id = $request->category_id;
+        $product->save();
+
+        //xóa toàn bộ dữ liệu ở bảng trung gian -> product id hiện tại
+
+        //DELETE FROM `product_tag` WHERE product_id = $id
+        $product->tags()->detach();
+
+        //thêm dữ liệu vào bảng trung gian
+        
+        /*
+            $request->tags = [
+                0 => 1,
+                1 => 2,
+            ];
+
+            foreach( $request->tags as $tag ){
+                //INSERT INTO `product_tag` ( product_id, tag_id ) VALUES ( $id , $tag )
+            }
+        */
+        $product->tags()->attach( $request->tags );
+
         return redirect()->route('products.index');
 
     }
@@ -126,7 +160,6 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $this->productRepository->destroy($request,$id);
-        return redirect()->route('products.index');
+        //
     }
 }
