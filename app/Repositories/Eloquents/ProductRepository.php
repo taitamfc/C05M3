@@ -29,7 +29,7 @@ class ProductRepository implements ProductRepositoryInterface
         //$product->description = $request->description;
         $product->category_id = $request->category_id;
         $product->save();
-        $product->tags()->attach( $request->tags );
+        //$product->tags()->attach( $request->tags );
     }
 
     public function update($request,$id)
@@ -45,7 +45,7 @@ class ProductRepository implements ProductRepositoryInterface
         //xóa toàn bộ dữ liệu ở bảng trung gian -> product id hiện tại
 
         //DELETE FROM `product_tag` WHERE product_id = $id
-        $product->tags()->detach();
+        //$product->tags()->detach();
 
         //thêm dữ liệu vào bảng trung gian
         

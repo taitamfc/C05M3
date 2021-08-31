@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 
 use App\Models\Category;
@@ -22,6 +23,7 @@ class ProductsController extends Controller
     {
         $this->productRepository = $productRepository;
     }
+    
 
     /**
      * Display a listing of the resource.
@@ -63,8 +65,30 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        $roles = [
+            'name' => 'required|max:255|unique:products'
+        ];
+        $messages = [
+            'required'  => 'Vui lòng nhập vào trường này',
+            'max'       => 'Vui lòng nhập dưới 255 ký tự',
+        ];
+        //$request->validate($roles,$messages);//tu dong chuyen huong ve cai trang create
+
+        $validator = Validator::make($request->all(), $roles,  $messages);
+
+        if( $validator->fails() ){
+            //chuyen huong ve trang post len , va hien thi loi
+            //withErrors: luu vao session loi
+
+            return redirect()->route('products.create')->withErrors( $validator )->withInput(); 
+        }
+
+        //xu ly thanh cong
+
+
         $this->productRepository->store($request);
-        return redirect()->route('products.index');
+        //$_SESSION['success'] = 'Lưu thành công !';
+        return redirect()->route('products.index')->with('success','Lưu thành công !');
     }
 
     /**
@@ -116,8 +140,24 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $roles = [
+            'name' => 'required|max:255'
+        ];
+        $messages = [
+            'required'  => 'Vui lòng nhập vào trường này',
+            'max'       => 'Vui lòng nhập dưới 255 ký tự',
+        ];
+        $validator = Validator::make($request->all(), $roles,  $messages);
+
+        if( $validator->fails() ){
+            //chuyen huong ve trang post len , va hien thi loi
+            //withErrors: luu vao session loi
+
+            return redirect()->route('products.create')->withErrors( $validator )->withInput(); 
+        }
+        
         $this->productRepository->update($request,$id);
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('success','Lưu thành công !');
 
     }
 

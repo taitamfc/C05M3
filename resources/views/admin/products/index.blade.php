@@ -10,6 +10,11 @@ Quản lý sản phẩm
       <div class="box">
          <!-- /.box-header -->
          <div class="box-body">
+         @if(Session::has('success'))
+         <div class="alert alert-success ">
+            {{ Session::get('success')}}
+         </div>
+         @endif
             <table class="table table-bordered">
                <tbody>
                   <tr>
