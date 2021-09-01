@@ -47,6 +47,11 @@ class Category extends Model
         user_id
 
         */
+        /*
+        Tham số thứ 2 là khóa ngoại tham chiếu tới bảng hiện tại
+        Tham số thứ 3 là khóa chính của bảng hiện tại
+        */
+
         //return $this->hasMany(Product::class, 'category_id', 'id');
         return $this->hasMany(Product::class);
         
