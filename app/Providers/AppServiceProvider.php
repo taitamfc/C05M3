@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             'App\Repositories\Contracts\ProductRepositoryInterface',
-            'App\Repositories\Eloquents\ItemRepository'
+            'App\Repositories\Eloquents\ProductRepository'
         );
     }
 
