@@ -36,6 +36,7 @@ class ProductsController extends Controller
         $params = [
             'items' => $items
         ];
+        
         return view('admin.products.index',$params);
     }
 
