@@ -14,6 +14,7 @@ use App\Models\Tag;
 //use App\Repositories\Eloquents\ItemRepository;
 
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\Http\Requests\FormProductRequest;
 
 class ProductsController extends Controller
 {
@@ -64,31 +65,9 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormProductRequest $request)
     {
-        $roles = [
-            'name' => 'required|max:255|unique:products'
-        ];
-        $messages = [
-            'required'  => 'Vui lòng nhập vào trường này',
-            'max'       => 'Vui lòng nhập dưới 255 ký tự',
-        ];
-        //$request->validate($roles,$messages);//tu dong chuyen huong ve cai trang create
-
-        $validator = Validator::make($request->all(), $roles,  $messages);
-
-        if( $validator->fails() ){
-            //chuyen huong ve trang post len , va hien thi loi
-            //withErrors: luu vao session loi
-
-            return redirect()->route('products.create')->withErrors( $validator )->withInput(); 
-        }
-
-        //xu ly thanh cong
-
-
         $this->productRepository->store($request);
-        //$_SESSION['success'] = 'Lưu thành công !';
         return redirect()->route('products.index')->with('success','Lưu thành công !');
     }
 

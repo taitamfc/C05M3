@@ -24,6 +24,8 @@
                      <td>{{ $item->name }}</td>
                      <td>{{ $item->created_at }}</td>
                      <td>
+                        <a href="{{ route('categories.show',$item->id) }}" class="badge bg-light-blue">Xem</a>
+
                         <a href="{{ route('categories.edit',$item->id) }}" class="badge bg-light-blue">Sửa</a>
 
                         <a href="#" class="badge bg-red">Xóa</a>

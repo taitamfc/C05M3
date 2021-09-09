@@ -66,14 +66,17 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        $item = Category::find(1); //has many tên mối quan hệ products
-        //$products = Product::where('category_id',$id)->get();
-        $products = $this->productRepository->findByCategory($id);
+        $item = Category::find($id); //has many tên mối quan hệ products
+        
+        //$products = $this->productRepository->findByCategory($id);
+
+        $products = $item->get_products;
+
         $params = [
             'item'      => $item,
             'products'  => $products
         ];
-        return view('admin.categories.index',$params);
+        return view('admin.categories.show',$params);
     }
 
     /**
