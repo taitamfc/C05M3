@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
 use App\View\Composers\MenuComposer;
+use App\View\Composers\UserInfoComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             'App\Repositories\Contracts\ProductRepositoryInterface',
-            'App\Repositories\Eloquents\ItemRepository'
+            'App\Repositories\Eloquents\ProductRepository'
         );
     }
 
@@ -30,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(['admin.includes.menu'], MenuComposer::class);
+        View::composer(['admin.includes.sidebar','admin.includes.header'], UserInfoComposer::class);
     }
 }

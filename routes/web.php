@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,7 @@ use App\Http\Controllers\Admin\UsersController;
 */
 
 /* Admin */
-Route::group(['prefix' => 'admin'], function()
+Route::group(['middleware' => 'auth','prefix' => 'admin'], function()
 {
     Route::get('/dashboard',DashboardController::class)->name('dashboard');
     Route::resource('products',ProductsController::class);
@@ -26,3 +27,14 @@ Route::group(['prefix' => 'admin'], function()
     Route::resource('tags',TagsController::class);
     Route::resource('users',UsersController::class);
 });
+
+Route::get('/language/{locale}', function ($locale) {
+    App::setLocale($locale);
+    session(['locale' => $locale]);
+    return redirect()->route('categories.index');
+});
+
+Route::get('/login',[LoginController::class,'login'])->name('login');
+Route::get('/logout',[LoginController::class,'logout'])->name('logout');
+Route::post('/login',[LoginController::class,'postLogin'])->name('postLogin');
+

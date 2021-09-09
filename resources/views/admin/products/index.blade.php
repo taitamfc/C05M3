@@ -31,7 +31,7 @@ Quản lý sản phẩm
                      <td>{{ $item->name }}</td>
                      <td>{{ $item->category->name }}</td>
                      <td>{{ $item->formated_tags }}</td>
-                     <td>{{ $item->created_at }}</td>
+                     <td>{{ $item->image }}</td>
                      <td>
                         <a href="{{ route('products.edit',$item->id) }}" class="badge bg-light-blue">Sửa</a>
 

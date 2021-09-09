@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title') 
-Quản lý danh mục sản phẩm
+{{ __('messages.manage_categories',[ 'name' => 'Sản phẩm' ]) }} - {{ trans_choice('messages.count_items', 1) }}
 @endsection
 
 @section('content')
@@ -14,9 +14,9 @@ Quản lý danh mục sản phẩm
                <tbody>
                   <tr>
                      <th style="width: 10px">#</th>
-                     <th>Tên</th>
-                     <th>Ngày Tạo</th>
-                     <th>Hành Động</th>
+                     <th>{{ __('messages.col_name') }}</th>
+                     <th>{{ __('messages.col_created') }}</th>
+                     <th>{{ __('messages.col_action') }}</th>
                   </tr>
                   @foreach( $items as $item )
                   <tr>

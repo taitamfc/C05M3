@@ -20,7 +20,7 @@ Tạo mới sản phẩm
               </div>
           @endif
 
-            <form action="{{ route('products.store') }}" method="POST" role="form">
+            <form action="{{ route('products.store') }}" method="POST" role="form" enctype="multipart/form-data">
                @csrf
               <div class="box-body">
 
@@ -32,6 +32,11 @@ Tạo mới sản phẩm
                 <div class="form-group">
                   <label for="description">Mô Tả</label>
                   <textarea name="description" id="description" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="image">Hình Ảnh</label>
+                  <input type="file" id="image" name="hinh_anh" />
                 </div>
 
                 <div class="form-group">

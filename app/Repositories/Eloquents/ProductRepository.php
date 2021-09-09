@@ -24,10 +24,21 @@ class ProductRepository implements ProductRepositoryInterface
     {
         $product = new Product();
         $product->name = $request->name;
-        $product->image = '';
+        
         $product->status = 1;
         //$product->description = $request->description;
         $product->category_id = $request->category_id;
+
+    
+        if ($request->hasFile('hinh_anh') ) {
+            $file = $request->hinh_anh;
+            //kiểm tra đuôi
+
+            //lưu vào folder
+            $filename = $file->store('','local');
+            $product->image = $filename;
+        }
+
         $product->save();
         //$product->tags()->attach( $request->tags );
     }

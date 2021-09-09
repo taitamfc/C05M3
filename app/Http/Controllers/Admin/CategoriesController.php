@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Repositories\Eloquents\ProductRepository;
 
+use Illuminate\Support\Facades\App;
+
 class CategoriesController extends Controller
 {
     protected $productRepository;
@@ -25,6 +27,9 @@ class CategoriesController extends Controller
     {
         // Get all records
         $items = Category::all();
+
+        $locale = session('locale', 'en');
+        App::setLocale($locale);
         
         $params = [
             'items' => $items
