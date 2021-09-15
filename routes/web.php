@@ -6,12 +6,11 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\UsersController;
-<<<<<<< HEAD
 use App\Http\Controllers\LoginController;
-=======
+
 
 use Illuminate\Http\Request;
->>>>>>> b7a420a90269781df54c3150280667e9985cd00a
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -157,4 +156,4 @@ Route::get('/gio-hang',function(Request $request ){
     //dang nhap vao 1 trang web
     //dung session de luu tru -> checkbox: ghi nho dang nhap => cookie
 });     
->>>>>>> b7a420a90269781df54c3150280667e9985cd00a
+
